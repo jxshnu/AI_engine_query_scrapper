@@ -2,7 +2,7 @@
 
 Captures, from your own live AI-chat sessions, the **exact user prompt**, the **internal search queries the model actually issued** (fan-outs), and the **cited sources** — for ChatGPT, Claude, Gemini, and Perplexity. Every recorded query is byte-traceable to a saved server payload: observed, never guessed.
 
-![Live interception UI — Claude capture with prompt, fan-out query, tool call, citations, history and wire-event feed](docs/screenshot.png)
+![Live interception UI — Claude capture with prompt, fan-out query, tool call, citations, history and wire-event feed](<docs/Screenshot 2026-10-05 170044.png>)
 
 ## Tech stack
 
