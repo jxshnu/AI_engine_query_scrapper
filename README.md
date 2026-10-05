@@ -87,6 +87,19 @@ Notes:
 - Everything is stored **plaintext locally** (raw prompts included). Don't share `.pw-profile/` or `logs/`.
 - Offline demo (no login): the **Demo scrape** card runs the same parsers over sample traffic per engine.
 
+## Requirements & limitations — read before running
+
+- **You must be logged in to every provider you tap** — inside the controlled Chrome window, not your normal browser. Perplexity works without login; ChatGPT, Claude, and Gemini require one. Login once per provider; the persistent profile keeps you signed in until the session/cookie expires, then you log in again in the tapped window.
+- **Google Chrome only.** The tap launches real Chrome (`channel="chrome"`) and depends on its CDP behavior. Other browsers (Edge, Brave, Firefox) are unsupported; the bundled-Chromium fallback exists but is untested and will hit harder bot checks.
+- **One tap at a time.** A single persistent profile means a second tap would fight over the profile lock. Stop the current tap before starting another engine.
+- **Ports 8000 (backend) and 5173 (frontend) must be free.**
+- **No backend auto-reload.** After any code change: `Ctrl+C`, rerun uvicorn, then Stop/Start the tap in the UI — otherwise you're testing stale code.
+- **Tested on Windows + PowerShell.** Paths and commands above assume that environment.
+- **Heavy by design.** Expect two Chrome instances (yours + tapped), plus both servers. Close your personal Chrome while capturing if pages feel slow.
+- **Bot defenses still apply.** It's a real browser, so logins/2FA work normally — but providers can still throttle, CAPTCHA, or force re-login on automated-profile traffic. If a site suddenly logs you out in the tapped window, that's the provider, not a bug.
+- **Gemini fan-out gap.** Gemini's web client does not receive its search queries over the wire (status + sources only), so fan-out lists stay empty there by evidence, not by defect. ChatGPT, Claude, and Perplexity expose theirs.
+- **Local plaintext storage.** Prompts (raw + sanitized), queries, citations, logs, and login cookies all sit unencrypted on disk. Single-user research tool — do not expose the backend port or share the folder.
+
 ## Repo hygiene
 
 Committed: code, tests, this README, `implementation (2).md` (design blueprint). Deliberately **not** committed (see `.gitignore`): login profile, all logs and raw wire samples, stored interactions, `node_modules/`, build output.
