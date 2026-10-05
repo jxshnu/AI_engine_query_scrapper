@@ -1,0 +1,15 @@
+# Deliberately not committed: secrets, local captures, build output.
+__pycache__/
+*.pyc
+.pytest_cache/
+node_modules/
+dist/
+# login profile (cookies/sessions) — never share
+backend/.pw-profile/
+# all logs + raw wire samples (contain real prompts/traffic)
+backend/logs/
+backend/interactions.jsonl
+backend/live_events.jsonl
+backend/live_stdout.log
+backend/live_stderr.log
+.DS_Store
